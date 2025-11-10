@@ -6,7 +6,6 @@ let
   cfg = config.services.nvml;
 
   pythonNvml = pkgs.python311.withPackages (ps: with ps; [
-    pynvml
     nvidia-ml-py
   ]);
 
