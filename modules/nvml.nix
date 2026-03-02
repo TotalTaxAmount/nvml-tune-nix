@@ -5,7 +5,7 @@ with lib;
 let
   cfg = config.services.nvml;
 
-  pythonNvml = pkgs.python311.withPackages (ps: with ps; [
+  pythonNvml = pkgs.python314.withPackages (ps: with ps; [
     nvidia-ml-py
   ]);
 
@@ -49,6 +49,7 @@ in {
         after = [ "multi-user.target" ];
         serviceConfig = {
           Type = "oneshot";
+          Restart = "no";
           ExecStart = "${pythonNvml}/bin/python3 ${pkgs.writeText "nvml-tune-${gpuIndex}.py" ''
             from pynvml import *
             import sys
